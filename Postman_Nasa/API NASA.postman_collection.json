@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "a1c88c78-def3-41a9-b507-b12c53c4daf1",
+		"name": "API NASA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33828605"
+	},
+	"item": [
+		{
+			"name": "Mars Rover Photos(Curiosity)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"console.log(jsonData)\r",
+							"pm.environment.set(\"second_photo_id\", jsonData.photos[1].id);\r",
+							"var camera_name_foto4 = jsonData.photos[1].camera.name \r",
+							"console.log(camera_name_foto4)\r",
+							"pm.environment.set(\"CUR4Camera_name\", camera_name_foto4);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"earth_date из GET запроса = earth_date первой фотографии по curiosity из тела ответа от сервера\", function () {\r",
+							"var earth_date_req = pm.request.url.query.toObject().earth_date\r",
+							"var earth_date_res = jsonData.photos[0].earth_date\r",
+							"pm.expect(earth_date_res).to.eql(earth_date_req);\r",
+							"});\r",
+							"pm.test(\"FHAZ из GET запроса = FHAZ из телла ответа от сервера для первой фотографии \", function () {\r",
+							"var camera_name_res = jsonData.photos[0].camera.name\r",
+							"    pm.expect(camera_name_res).to.eql(\"FHAZ\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API NASA}}/rovers/curiosity/photos?earth_date=2022-01-21&camera=FHAZ",
+					"host": [
+						"{{API NASA}}"
+					],
+					"path": [
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "earth_date",
+							"value": "2022-01-21"
+						},
+						{
+							"key": "camera",
+							"value": "FHAZ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mars Rover Photos(Opportunity)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API NASA}}/rovers/opportunity/photos?earth_date=2022-1-21",
+					"host": [
+						"{{API NASA}}"
+					],
+					"path": [
+						"rovers",
+						"opportunity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "earth_date",
+							"value": "2022-1-21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mars Rover Photos(Spirit)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API NASA}}/rovers/spirit/photos?earth_date=2022-1-21",
+					"host": [
+						"{{API NASA}}"
+					],
+					"path": [
+						"rovers",
+						"spirit",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "earth_date",
+							"value": "2022-1-21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mars Rover Photos(Curiosity) тест",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"console.log(jsonData)\r",
+							"pm.environment.set(\"second_photo_id\", jsonData.photos[1].id);\r",
+							"var camera_name_photos4 = jsonData.photos[1].camera.name\r",
+							"console.log(camera_name_photos4)\r",
+							"\r",
+							"pm.environment.set(\"CUR4Camera_name\", camera_name_photos4);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"earth_date из GET запроса = первой фотографии curiosity из тела ответа от сервера\", function () {\r",
+							"    var earth_date_res = jsonData.photos[0].earth_date \r",
+							"    var earth_date_req = pm.request.url.query.toObject().earth_date\r",
+							"    pm.expect(earth_date_res).to.eql(earth_date_req);\r",
+							"});\r",
+							"pm.test(\"FHAZ из GET запроса = FHAZ из телла ответа от сервера для первой фотографии \", function () {\r",
+							"var camera_name_res = jsonData.photos[0].camera.name\r",
+							"    pm.expect(camera_name_res).to.eql(\"FHAZ\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API NASA}}/rovers/curiosity/photos?earth_date=2022-01-21&camera=FHAZ",
+					"host": [
+						"{{API NASA}}"
+					],
+					"path": [
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "earth_date",
+							"value": "2022-01-21"
+						},
+						{
+							"key": "camera",
+							"value": "FHAZ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/03363/opgs/edr/fcam/FLB_696038660EDR_F0922864FHAZ00304M_.JPG",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/03363/opgs/edr/fcam/FLB_696038660EDR_F0922864FHAZ00304M_.JPG",
+					"protocol": "https",
+					"host": [
+						"mars",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"msl-raw-images",
+						"proj",
+						"msl",
+						"redops",
+						"ods",
+						"surface",
+						"sol",
+						"03363",
+						"opgs",
+						"edr",
+						"fcam",
+						"FLB_696038660EDR_F0922864FHAZ00304M_.JPG"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "api_key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "6yadBDntxBwPmHbZRuO4qPGgLwQZTN807l3VSoJU",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API NASA",
+			"value": "https://api.nasa.gov/mars-photos/api/v1"
+		}
+	]
+}
